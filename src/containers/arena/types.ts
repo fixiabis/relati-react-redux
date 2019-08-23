@@ -17,7 +17,7 @@ export type ArenaAction = (
 export interface ArenaPlayerFoundAction {
     type: "ARENA_PLAYER_FOUND";
     socketId: string;
-    symbol: string;
+    symbol: RelatiSymbol;
 }
 
 export interface ArenaPlayerSelectGridAction {

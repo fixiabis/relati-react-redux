@@ -1,0 +1,61 @@
+#game-page {
+  .versus-header {
+    & {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    & > * {
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+    }
+
+    .versus {
+      background-image: url(./icon/versus.svg);
+    }
+
+    .player-o,
+    .player-x {
+      border: {
+        width: 5px;
+        style: solid;
+        radius: 25px;
+      }
+
+      background: {
+        position: center;
+        size: cover;
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin-top: 25px;
+        margin-left: 25px;
+      }
+    }
+
+    @each $type, $color in (o: crimson, x: royalblue) {
+      .player-#{$type} {
+        & {
+          border-color: $color;
+          background-image: url(./icon/player-#{$type}.svg);
+        }
+
+        &::after {
+          background-image: url(./icon/symbol-#{$type}.svg);
+        }
+      }
+    }
+  }
+
+  .board-container {
+    height: calc(100vh - 120px);
+  }
+}
