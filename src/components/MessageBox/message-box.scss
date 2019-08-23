@@ -1,0 +1,97 @@
+.message-box-container {
+  @mixin message-icon($type) {
+    .message-icon.#{$type}::before {
+      background-image: url(./icon/#{$type}.svg);
+    }
+  }
+
+  &,
+  .message-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: message-box-container-show 0.15s;
+  }
+
+  .message-box {
+    flex-direction: column;
+
+    width: 300px;
+    height: 200px;
+
+    border: {
+      width: 2px;
+      color: #888;
+      style: solid;
+      radius: 5px;
+    }
+
+    color: #888;
+    background-color: #f2f2f2;
+    animation: message-box-show 0.25s 0.15s backwards;
+  }
+
+  .message-text {
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .message-icon::before {
+    display: block;
+    content: "";
+    width: 50px;
+    height: 50px;
+  }
+
+  .message-icon.rotate::before {
+    animation: message-icon-rotate 1s infinite ease-in-out;
+  }
+
+  .message-icon.blink::before {
+    animation: message-icon-blink 1s infinite ease-in-out;
+  }
+
+  $icon-types: (draw, owin, xwin, yorn, wait, dots);
+
+  @each $type in $icon-types {
+    @include message-icon($type);
+  }
+
+  @keyframes message-box-container-show {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes message-box-show {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  @keyframes message-icon-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes message-icon-blink {
+    25% {
+      opacity: 0;
+    }
+  }
+}

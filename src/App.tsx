@@ -1,5 +1,5 @@
 import './App.scss';
-import { store } from './state';
+import { store } from './containers';
 import { GamePage } from './views/GamePage';
 import { HelpPage } from './views/HelpPage';
 import { MainPage } from './views/MainPage';

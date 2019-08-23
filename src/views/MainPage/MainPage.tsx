@@ -1,7 +1,7 @@
 import './main-page.scss';
 import React from 'react';
 import { Redirect } from 'react-router';
-import { connector, AppProps } from '../../state';
+import { connector, AppProps } from '../../containers';
 
 class MainPage extends React.Component<AppProps> {
   render() {

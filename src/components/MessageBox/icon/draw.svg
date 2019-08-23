@@ -1,0 +1,41 @@
+<svg id="debug" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none">
+    <g stroke-width="12" stroke="#888">
+        <path class="short-line" d="M 25 25 m 15 -10 a 7.5 7.5, 0 0 0, -15 0 v 2" stroke="crimson"></path>
+        <path class="long-line" d="M 25 25 m -10 -15 a 7.5 7.5, 0 0 0, 0 15 h 20 a 7.5 7.5, 0 0 1, 0 15"></path>
+        <path class="short-line" d="M 25 25 m -15 10 a 7.5 7.5, 0 0 0, 15 0 v -2" stroke="royalblue"></path>
+    </g>
+
+    <g stroke-width="6" stroke="#f2f2f2">
+            <path class="short-line" d="M 25 25 m 15 -10 a 7.5 7.5, 0 0 0, -15 0 v 2"></path>
+        <path class="long-line" d="M 25 25 m -10 -15 a 7.5 7.5, 0 0 0, 0 15 h 20 a 7.5 7.5, 0 0 1, 0 15"></path>
+        <path class="short-line" d="M 25 25 m -15 10 a 7.5 7.5, 0 0 0, 15 0 v -2"></path>
+    </g>
+
+    <style>
+        svg:target {
+            background-color: #f2f2f2;
+        }
+
+        .short-line {
+            animation: short-line-draw 1s;
+        }
+
+        .long-line {
+            animation: long-line-draw 1s backwards;
+        }
+
+        @keyframes short-line-draw {
+            from {
+                stroke-dasharray: 36;
+                stroke-dashoffset: 36;
+            }
+        }
+
+        @keyframes long-line-draw {
+            from {
+                stroke-dasharray: 92;
+                stroke-dashoffset: 92;
+            }
+        }
+    </style>
+</svg>

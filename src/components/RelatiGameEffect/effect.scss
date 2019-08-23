@@ -1,0 +1,18 @@
+.relati-board {
+  .effect-lines path {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 15;
+    opacity: 0.3;
+    animation: relati-route 0.25s linear;
+  }
+
+  .effect-grids path {
+    transition: all 0.25s;
+  }
+}
+
+@keyframes relati-route {
+  from {
+      stroke-dashoffset: 15;
+  }
+}
