@@ -1,0 +1,26 @@
+.page {
+    & {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  
+      width: 100vw;
+      height: 100vh;
+  
+      color: #888;
+      background-color: #f2f2f2;
+      animation: page-show 0.25s;
+    }
+  
+    & > * {
+      width: 100%;
+    }
+  }
+  
+  @keyframes page-show {
+    from {
+      opacity: 0;
+    }
+  }
+  

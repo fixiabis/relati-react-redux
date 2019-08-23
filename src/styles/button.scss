@@ -1,0 +1,60 @@
+button {
+  & {
+    cursor: pointer;
+
+    width: 50px;
+    height: 50px;
+
+    border: {
+      style: none;
+      radius: 5px;
+    }
+
+    background: {
+      color: #888;
+      repeat: no-repeat;
+      position: center;
+    }
+
+    transition: transform 0.5s;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(0.8);
+  }
+
+  $type-list: (
+    play: crimson,
+    help: royalblue,
+    exit: #888,
+    accept: crimson,
+    reject: royalblue,
+    verify: seagreen
+  );
+
+  @each $type, $color in $type-list {
+    &.#{$type} {
+      background: {
+        color: $color;
+        image: url(../images/button-icon/#{$type}.svg);
+      }
+    }
+  }
+}
+
+.button-group {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+  }
+
+  button {
+    margin: 0px 25px;
+  }
+}

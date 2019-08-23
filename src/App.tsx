@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { store } from './state';
+import { GamePage } from './views/GamePage';
+import { HelpPage } from './views/HelpPage';
+import { MainPage } from './views/MainPage';
 
-const App: React.FC = () => {
+import React from 'react';
+import { Provider } from 'react-redux';
+import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
+
+let defaultPagePath = `/${store.getState().pagePath}`;
+
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Route exact path="/" render={() => <Redirect to={defaultPagePath} />} />
+        <Route path="/main" component={MainPage} />
+        <Route path="/game" component={GamePage} />
+        <Route path="/help" component={HelpPage} />
+      </Router>
+    </Provider>
   );
 }
 
