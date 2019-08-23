@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, ButtonGroup } from "../Button";
 import { MessageBoxConfig } from "../MessageBox";
 import "./message-box.scss";
 
@@ -32,19 +31,19 @@ export default class MessageBox extends React.Component<MessageBoxProps, Message
     switch (this.state.type) {
       case "yorn":
         controls = (
-          <ButtonGroup>
-            <Button icon="accept" onClick={e => this.userResponse(true)} />
-            <Button icon="reject" onClick={e => this.userResponse(false)} />
-          </ButtonGroup>
+          <div className="button-group">
+            <button className="accept" onClick={e => this.userResponse(true)} />
+            <button className="reject" onClick={e => this.userResponse(false)} />
+          </div>
         );
 
         break;
 
       case "hint":
         controls = (
-          <ButtonGroup>
-            <Button icon="verify" onClick={e => this.userResponse(true)} />
-          </ButtonGroup>
+          <div className="button-group">
+            <button className="verify" onClick={e => this.userResponse(true)} />
+          </div>
         );
 
         break;

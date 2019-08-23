@@ -1,24 +1,36 @@
-import { PageActionType, PageAction, PageState, PageDispatchMapper } from "./page";
-import { ArenaActionType, ArenaAction, ArenaState, ArenaDispatchMapper } from "./arena";
+import { PageActionType, PageAction, PageState, PageDispatchMapper, PageStateMappedToProps } from "./page";
+import { ArenaActionType, ArenaAction, ArenaState, ArenaDispatchMapper, ArenaStateMappedToProps } from "./arena";
 
-export type AppActionType = PageActionType | ArenaActionType;
+export type AppActionType = (
+    PageActionType |
+    ArenaActionType
+);
 
-export type AppAction = PageAction | ArenaAction;
+export type AppAction = (
+    PageAction |
+    ArenaAction
+);
 
-export type AppDispatchMapper = PageDispatchMapper & ArenaDispatchMapper;
+export type AppDispatchMapper = (
+    PageDispatchMapper &
+    ArenaDispatchMapper
+);
 
-export interface AppState {
-    pagePath: PageState;
-    arena: ArenaState;
-}
+export type AppState = (
+    PageState &
+    ArenaState
+);
 
 export interface AppStateMapper {
     (state: AppState): AppStateMappedToProps;
 }
 
-export interface AppStateMappedToProps {
-    pagePath: PageState;
-    arena: ArenaState;
-}
+export type AppStateMappedToProps = (
+    PageStateMappedToProps &
+    ArenaStateMappedToProps
+);
 
-export type AppProps = AppStateMappedToProps & AppDispatchMapper;
+export type AppProps = (
+    AppStateMappedToProps &
+    AppDispatchMapper
+);
