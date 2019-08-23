@@ -1,8 +1,13 @@
 import mapDispatchToProps from "./action";
-import { AppStateMapper } from "./types";
+import { PagePath } from "./types";
 import { connect } from "react-redux";
 
-let mapStateToProps: AppStateMapper = state => state;
+interface State {
+    pagePath: PagePath;
+}
+
+let mapStateToProps = ({ pagePath }: State) => ({ pagePath });
+
 let connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default connector;

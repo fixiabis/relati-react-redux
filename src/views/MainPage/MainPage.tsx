@@ -1,9 +1,9 @@
 import './main-page.scss';
 import React from 'react';
 import { Redirect } from 'react-router';
-import { connector, AppProps } from '../../containers';
+import { connector, PageProps } from '../../containers/page';
 
-class MainPage extends React.Component<AppProps> {
+class MainPage extends React.Component<PageProps> {
   render() {
     let { pagePath, switchPageTo } = this.props;
 

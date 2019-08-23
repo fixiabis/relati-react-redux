@@ -1,6 +1,6 @@
-import { DispatchMapper } from "./types";
+import { PageDispatchMapper } from "./types";
 
-let mapDispatchToProps: DispatchMapper = {
+let mapDispatchToProps: PageDispatchMapper = {
     switchPageTo: (pagePath) => ({
         type: "SWITCH_PAGE", pagePath
     })

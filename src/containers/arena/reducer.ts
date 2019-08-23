@@ -1,4 +1,4 @@
-import { Action, State } from "./types";
+import { ArenaAction, Arena as State } from "./types";
 import { RelatiGame } from "../../game";
 
 let defaultState: State = {
@@ -8,7 +8,7 @@ let defaultState: State = {
     gameResultMessage: ""
 };
 
-function reducer(state: State = defaultState, action: Action) {
+function reducer(state: State = defaultState, action: ArenaAction) {
     switch (action.type) {
         case "ARENA_PLAYER_FOUND": return {
             ...state,
