@@ -1,4 +1,4 @@
-import { RelatiGame, RelatiSymbol, RelatiGrid } from "../../game";
+import { RelatiGame, RelatiSymbol, RelatiGrid } from "../../modules/game";
 
 export type ArenaActionType = (
     "ARENA_PLAYER_FOUND" |

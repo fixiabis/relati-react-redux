@@ -1,5 +1,5 @@
 import { ArenaAction, Arena as State } from "./types";
-import { RelatiGame } from "../../game";
+import { RelatiGame } from "../../modules/game";
 
 let defaultState: State = {
     game: new RelatiGame(),

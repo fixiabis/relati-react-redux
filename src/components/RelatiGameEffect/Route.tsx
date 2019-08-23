@@ -1,5 +1,5 @@
 import React from "react";
-import { RelatiGrid, RelatiRole, RelatiSymbolColor } from "../../game";
+import { RelatiGrid, RelatiRole, RelatiSymbolColor } from "../../modules/game";
 
 interface RouteProps {
   grids: RelatiGrid[];

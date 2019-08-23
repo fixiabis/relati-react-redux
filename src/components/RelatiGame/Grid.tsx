@@ -1,5 +1,5 @@
 import React from "react";
-import { RelatiGrid, RelatiSymbolColor } from "../../game";
+import { RelatiGrid, RelatiSymbolColor } from "../../modules/game";
 
 interface GridProps { grid: RelatiGrid; }
 
