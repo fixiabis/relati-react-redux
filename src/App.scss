@@ -1,5 +1,5 @@
-@import "./styles/page.scss";
-@import "./styles/button.scss";
+@import "./assets/styles/page.scss";
+@import "./assets/styles/button.scss";
 
 // preload button icon
 
@@ -7,7 +7,7 @@ body::after {
   $types: "";
 
   @each $type in (play, help, exit, accept, reject, verify) {
-    $types: #{$types} url(./images/button-icon/#{$type}.svg);
+    $types: #{$types} url(./assets/images/button-icon/#{$type}.svg);
   }
 
   content: $types;
