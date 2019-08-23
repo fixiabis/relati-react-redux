@@ -1,4 +1,4 @@
-import { Action } from "../types";
+import { Action } from "./types";
 import { PagePath as State } from "./types";
 
 let defaultState: State = "main";

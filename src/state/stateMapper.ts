@@ -1,8 +1,5 @@
-import { State, StateMapper } from "./types";
-import sharedStateMapper from "./shared/stateMapper";
+import { StateMapper } from "./types";
 
-let mapStateToProps: StateMapper = (state: State) => ({
-    pagePath: sharedStateMapper(state.pagePath)
-});
+let mapStateToProps: StateMapper = state => state;
 
 export default mapStateToProps;
