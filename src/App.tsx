@@ -7,18 +7,18 @@ import { MainPage } from './views/MainPage';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
-
-let defaultPagePath = `/${store.getState().pagePath}`;
+import { MessageBox } from './components/MessageBox';
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Route exact path="/" render={() => <Redirect to={defaultPagePath} />} />
+        <Route exact path="/" render={() => <Redirect to="/main" />} />
         <Route path="/main" component={MainPage} />
         <Route path="/game" component={GamePage} />
         <Route path="/help" component={HelpPage} />
       </Router>
+      <MessageBox />
     </Provider>
   );
 }

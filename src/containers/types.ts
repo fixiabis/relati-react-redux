@@ -1,24 +1,29 @@
 import { PageActionType, PageAction, PageState, PageDispatchMapper, PageStateMappedToProps } from "./page";
 import { ArenaActionType, ArenaAction, ArenaState, ArenaDispatchMapper, ArenaStateMappedToProps } from "./arena";
+import { MessageBoxActionType, MessageBoxAction, MessageBoxState, MessageBoxDispatchMapper, MessageBoxStateMappedToProps } from "./message-box";
 
 export type AppActionType = (
     PageActionType |
-    ArenaActionType
+    ArenaActionType |
+    MessageBoxActionType
 );
 
 export type AppAction = (
     PageAction |
-    ArenaAction
+    ArenaAction |
+    MessageBoxAction
 );
 
 export type AppDispatchMapper = (
     PageDispatchMapper &
-    ArenaDispatchMapper
+    ArenaDispatchMapper &
+    MessageBoxDispatchMapper
 );
 
 export type AppState = (
     PageState &
-    ArenaState
+    ArenaState &
+    MessageBoxState
 );
 
 export interface AppStateMapper {
@@ -27,10 +32,8 @@ export interface AppStateMapper {
 
 export type AppStateMappedToProps = (
     PageStateMappedToProps &
-    ArenaStateMappedToProps
+    ArenaStateMappedToProps &
+    MessageBoxStateMappedToProps
 );
 
-export type AppProps = (
-    AppStateMappedToProps &
-    AppDispatchMapper
-);
+export type AppProps = AppStateMappedToProps & AppDispatchMapper;

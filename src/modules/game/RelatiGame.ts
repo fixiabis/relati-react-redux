@@ -36,7 +36,7 @@ export default class RelatiGame {
     public onGridSelect(grid: RelatiGrid | null) {
         if (!grid || grid.body || this.winner) return;
 
-        let { nowPlayerSymbol: nowPlayerSymbol, totalPlayer } = this;
+        let { nowPlayerSymbol, totalPlayer } = this;
         let role;
 
         if (this.turn < totalPlayer) {

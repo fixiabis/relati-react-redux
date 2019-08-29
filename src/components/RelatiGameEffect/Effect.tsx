@@ -1,8 +1,8 @@
+import "./effect.scss";
 import React from "react";
 import { RelatiBoard, RelatiGrid, RelatiRole, RelatiRouter, RelatiRouteType, RelatiSymbol } from "../../modules/game";
 import { GridBoard } from "../../modules/game/GridBoard";
 import Grid from "../RelatiGame/Grid";
-import "./effect.scss";
 import Route from "./Route";
 
 interface EffectProps {

@@ -1,34 +1,24 @@
 import React from "react";
 import { MessageBoxConfig } from "../MessageBox";
 import "./message-box.scss";
+import { MessageBoxState as State } from "../../containers/message-box";
+import { connect } from "react-redux";
+import mapDispatchToProps from "../../containers/message-box/action";
 
-type MessageBoxProps = MessageBoxConfig;
-type MessageBoxState = MessageBoxConfig & { initiative?: boolean };
+type MessageBoxProps = MessageBoxConfig & { hideMessageBox: () => void };
 
-export default class MessageBox extends React.Component<MessageBoxProps, MessageBoxState> {
-  public static getDerivedStateFromProps(props: MessageBoxProps, state: MessageBoxState) {
-    if (state.initiative) {
-      delete state.initiative;
-      return state;
-    } else return { ...props };
-  }
-
-  constructor(props: MessageBoxProps) {
-    super(props);
-    this.state = { ...props };
-  }
-
+class MessageBox extends React.Component<MessageBoxProps> {
   public userResponse(result: boolean) {
-    this.setState({ show: false, initiative: true });
+    this.props.hideMessageBox();
     if (this.props.onUserResponse) this.props.onUserResponse(result);
   }
 
   public render() {
-    if (this.state.show === false) return <></>;
+    if (this.props.show === false) return <></>;
 
     let controls;
 
-    switch (this.state.type) {
+    switch (this.props.type) {
       case "yorn":
         controls = (
           <div className="button-group">
@@ -52,11 +42,21 @@ export default class MessageBox extends React.Component<MessageBoxProps, Message
     return (
       <div className="message-box-container">
         <div className="message-box">
-          <div className={`message-icon ${this.state.icon}`} />
-          <div className="message-text">{this.state.text}</div>
+          <div className={`message-icon ${this.props.icon}`} />
+          <div className="message-text">{this.props.text}</div>
           {controls}
         </div>
       </div>
     );
   }
 }
+
+let mapStateToProps = ({ messageBox: {
+  show, icon, type, text, onUserResponse
+} }: State) => ({
+  show, icon, type, text, onUserResponse
+});
+
+let connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(MessageBox);

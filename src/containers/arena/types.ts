@@ -3,15 +3,13 @@ import { RelatiGame, RelatiSymbol, RelatiGrid } from "../../modules/game";
 export type ArenaActionType = (
     "ARENA_PLAYER_FOUND" |
     "ARENA_PLAYER_SELECT_GRID" |
-    "ARENA_PLAYER_LEAVE" |
-    "ARENA_GAME_RESULT"
+    "ARENA_PLAYER_LEAVE"
 );
 
 export type ArenaAction = (
     ArenaPlayerFoundAction |
     ArenaPlayerSelectGridAction |
-    ArenaPlayerLeaveAction |
-    ArenaGameResultAction
+    ArenaPlayerLeaveAction
 );
 
 export interface ArenaPlayerFoundAction {
@@ -29,23 +27,16 @@ export interface ArenaPlayerLeaveAction {
     type: "ARENA_PLAYER_LEAVE";
 }
 
-export interface ArenaGameResultAction {
-    type: "ARENA_GAME_RESULT";
-    message: string;
-}
-
 export interface ArenaDispatchMapper {
     playerFound(socketId: string, symbol: RelatiSymbol): ArenaPlayerFoundAction;
     playerSelectGrid(grid: RelatiGrid | null): ArenaPlayerSelectGridAction;
     playerLeave(): ArenaPlayerLeaveAction;
-    gameResult(message: string): ArenaGameResultAction;
 }
 
 export interface Arena {
     game: RelatiGame;
     playerSymbol: RelatiSymbol;
     opponentSocketId: string;
-    gameResultMessage: string;
 }
 
 export interface ArenaState {
