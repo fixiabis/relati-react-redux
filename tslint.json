@@ -16,12 +16,11 @@
         "jsx-boolean-value": false,
         "no-switch-case-fall-through": false
     },
-    "rulesDirectory": [
-    ],
+    "rulesDirectory": [],
     "linterOptions": {
         "exclude": [
             "config/**/*.js",
             "node_modules/**/*.ts"
-       ]
-   }
+        ]
+    }
 }
