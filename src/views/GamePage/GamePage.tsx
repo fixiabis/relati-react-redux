@@ -12,6 +12,10 @@ let socketClient = socketIO();
 socketClient.on("player-found", (socketId: string, symbol: RelatiSymbol) => {
   page.props.playerFound(socketId, symbol);
   page.props.hideMessageBox();
+
+  page.props.showMessageBox("HINT", symbol.toLowerCase() + "win", `你是${symbol}`, () => {
+    page.props.hideMessageBox();
+  });
 });
 
 socketClient.on("player-select-grid", ({ x, y }: { x: number, y: number }) => {
@@ -94,8 +98,9 @@ class GamePage extends React.Component<AppProps> {
   public render() {
     let {
       arena: {
-        game,
-        game: { turn, board, routeType, nowPlayerSymbol: symbol }
+        game: {
+          turn, board, routeType, nowPlayerSymbol: symbol
+        }, game
       }, pagePath
     } = this.props;
 
