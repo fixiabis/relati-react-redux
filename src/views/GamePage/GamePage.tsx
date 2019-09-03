@@ -84,16 +84,19 @@ class GamePage extends React.Component<AppProps> {
   constructor(props: AppProps) {
     super(props);
     page = this;
-    this.props.showMessageBox("INFO", "dots rotate", "正在尋找");
-    socketClient.emit("player-find");
+
+    if (this.props.pagePath === 'game') {
+      this.props.showMessageBox("INFO", "dots rotate", "正在尋找");
+      socketClient.emit("player-find");
+    }
   }
 
   public render() {
     let {
-      pagePath, arena: {
+      arena: {
         game,
-        game: { turn, board, nowPlayerSymbol: symbol, routeType }
-      }
+        game: { turn, board, routeType, nowPlayerSymbol: symbol }
+      }, pagePath
     } = this.props;
 
     let hints = game.getPlaceableGrids(symbol).map(
