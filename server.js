@@ -14,48 +14,58 @@ io.on("connection", socketClient => {
     let leaveTimer;
 
     socketClient.on("player-find", () => {
-        console.log("player-find");
+        console.log(`'${socketClient.id}' finding player`);
 
         while (players.length) {
             let player = players.shift();
 
-            if (!player.disconnected) {
-                socketClientInfo[player.id] = {
-                    playerSymbol: "O",
-                    opponentSocketId: socketClient.id
-                };
-                player.emit("player-found", socketClient.id, "O");
+            if (player.disconnected) continue;
 
-                socketClientInfo[socketClient.id] = {
-                    playerSymbol: "X",
-                    opponentSocketId: player.id
-                };
-                socketClient.emit("player-found", player.id, "X");
-                return;
-            }
+            player.emit("player-found", socketClient.id, "O");
+            socketClientInfo[player.id] = {
+                playerSymbol: "O",
+                opponentSocketId: socketClient.id
+            };
+            console.log(`'${player.id}' founded player`);
+
+            socketClient.emit("player-found", player.id, "X");
+            socketClientInfo[socketClient.id] = {
+                playerSymbol: "X",
+                opponentSocketId: player.id
+            };
+            console.log(`'${socketClient.id}' founded player`);
+
+            return;
         }
 
         players.push(socketClient);
+        console.log(`'${socketClient.id}' waiting`);
     });
 
     socketClient.on("player-select-grid", ({ x, y }, opponentSocketId) => {
-        console.log("player-select-grid", { x, y }, opponentSocketId);
+        if (leaveTimer) clearTimeout(leaveTimer), leaveTimer = null;
 
-        clearTimeout(leaveTimer);
         socketClient.emit("player-select-grid", { x, y });
         socketClient.to(opponentSocketId).emit("player-select-grid", { x, y });
+
+        console.log(`'${socketClient.id}' select grid (x: ${x}, y: ${y})`);
     });
 
     socketClient.on("player-leave", opponentSocketId => {
         socketClient.to(opponentSocketId).emit("player-leave");
+        console.log(`'${socketClient.id}' leaved`);
     });
 
     socketClient.on("disconnect", () => {
-        leaveTimer = setTimeout(function () {
-            console.log("timeout");
-            let opponentSocketId = socketClient[socketClient.id];
-            socketClient.to(opponentSocketId).emit("player-leave");
-        }, 60000);
+        let { opponentSocketId } = socketClientInfo[socketClient.id] || {};
+        console.log(`'${socketClient.id}' disconnected`);
+
+        if (opponentSocketId) {
+            leaveTimer = setTimeout(() => {
+                socketClient.to(opponentSocketId).emit("player-leave");
+                console.log(`'${opponentSocketId}' is missing opponent '${socketClient.id}'`);
+            }, 60000);
+        }
     });
 });
 
