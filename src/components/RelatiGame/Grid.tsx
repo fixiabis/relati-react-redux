@@ -1,14 +1,14 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { RelatiGrid, RelatiSymbolColor } from "../../modules/game";
 
-interface GridProps { grid: RelatiGrid; }
+interface GridProps { grid: RelatiGrid; focus?: boolean; }
 
 const SymbolPathMap = {
   O: "m 0 -1.5, a 1.5 1.5, 0 0 1, 0 3, a 1.5 1.5, 0 0 1, 0 -3",
   X: "m -1.5 -1.5, l 3 3, m 0 -3, l -3 3"
 };
 
-export default function Grid({ grid }: GridProps) {
+export default function Grid({ grid, focus = false }: GridProps) {
   if (!grid.body) return <></>;
 
   let paths = [];
@@ -20,12 +20,13 @@ export default function Grid({ grid }: GridProps) {
     fill: "none",
     key: "1",
     stroke: RelatiSymbolColor[grid.body.symbol],
-    strokeWidth: "0.6"
+    strokeWidth: "0.6",
+    opacity: ""
   };
 
   if (grid.body.is("launcher")) {
     symbolProps.strokeWidth = "1";
-    paths.push(<path {...symbolProps}/>);
+    paths.push(<path {...symbolProps} />);
     symbolProps.key = "2";
     symbolProps.stroke = "#f2f2f2";
     symbolProps.strokeWidth = "0.5";
@@ -33,6 +34,14 @@ export default function Grid({ grid }: GridProps) {
     symbolProps.stroke = "#666";
   }
 
-  paths.push(<path {...symbolProps}/>);
+  paths.push(<path {...symbolProps} />);
+
+  if (focus) {
+    symbolProps.key = "0";
+    symbolProps.strokeWidth = "1";
+    symbolProps.opacity = "0.4";
+    paths.unshift(<path {...symbolProps} />);
+  }
+
   return <g>{paths}</g>;
 }

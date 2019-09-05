@@ -8,11 +8,18 @@
 
   .effect-grids path {
     transition: all 0.25s;
+    animation: symbol-show 1s 2;
+  }
+
+  @keyframes symbol-show {
+    from {
+      opacity: 0;
+    }
   }
 }
 
 @keyframes relati-route {
   from {
-      stroke-dashoffset: 15;
+    stroke-dashoffset: 15;
   }
 }

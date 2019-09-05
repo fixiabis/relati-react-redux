@@ -37,6 +37,7 @@ export interface Arena {
     game: RelatiGame;
     playerSymbol: RelatiSymbol;
     opponentSocketId: string;
+    lastCoor: { x: number, y: number } | null;
 }
 
 export interface ArenaState {

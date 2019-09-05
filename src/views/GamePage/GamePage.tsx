@@ -100,7 +100,8 @@ class GamePage extends React.Component<AppProps> {
       arena: {
         game: {
           turn, board, routeType, nowPlayerSymbol: symbol
-        }, game
+        }, game,
+        lastCoor
       }, pagePath
     } = this.props;
 
@@ -109,6 +110,8 @@ class GamePage extends React.Component<AppProps> {
         <Hint key={key} x={x} y={y} color={RelatiSymbolColor[symbol]} />
       )
     );
+
+    let focusedGrid = lastCoor && board.getGrid(lastCoor.x, lastCoor.y);
 
     if (pagePath !== 'game') {
       return <Redirect to={`/${pagePath}`} />;
@@ -123,7 +126,7 @@ class GamePage extends React.Component<AppProps> {
         </div>
         <Board id="game-board" width={board.width} height={board.height} onCoorSelect={this.onCoorSelect}>
           <g className="hints">{hints}</g>
-          <Effect turn={turn} symbol={symbol} board={board} routeType={routeType} />
+          <Effect turn={turn} symbol={symbol} board={board} routeType={routeType} focus={focusedGrid} />
         </Board>
         <div className="button-group">
           <button className="exit" onClick={this.leavePage} />

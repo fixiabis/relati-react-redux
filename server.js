@@ -13,6 +13,11 @@ let players = [];
 io.on("connection", socketClient => {
     let leaveTimer;
 
+    if (socketClientInfo[socketClient.id] && socketClientInfo[socketClient.id].lastCoor) {
+        socketClient.emit("player-select-grid", socketClientInfo[socketClient.id].lastCoor);
+        delete socketClientInfo[socketClient.id].lastCoor;
+    }
+
     socketClient.on("player-find", () => {
         console.log(`'${socketClient.id}' finding player`);
 
@@ -45,8 +50,14 @@ io.on("connection", socketClient => {
     socketClient.on("player-select-grid", ({ x, y }, opponentSocketId) => {
         if (leaveTimer) clearTimeout(leaveTimer), leaveTimer = null;
 
+        delete socketClientInfo[socketClient.id].lastCoor;
+
         socketClient.emit("player-select-grid", { x, y });
         socketClient.to(opponentSocketId).emit("player-select-grid", { x, y });
+
+        if (socketClientInfo[opponentSocketId]) {
+            socketClientInfo[opponentSocketId].lastCoor = { x, y };
+        }
 
         console.log(`'${socketClient.id}' select grid (x: ${x}, y: ${y})`);
     });

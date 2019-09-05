@@ -10,6 +10,7 @@ interface EffectProps {
   symbol: RelatiSymbol;
   routeType: RelatiRouteType;
   board: RelatiBoard;
+  focus: RelatiGrid | null;
 }
 
 interface EffectState {
@@ -123,8 +124,11 @@ export default class Effect extends React.Component<EffectProps, EffectState> {
   }
 
   public render() {
+    let focusedGrid = this.props.focus;
+
     let grids = this.board.grids.map((grid, key) => {
       let role = this.props.board.grids[key].body;
+      let focus = focusedGrid && grid.x === focusedGrid.x && grid.y === focusedGrid.y;
 
       if (role) {
         if (!role.is("repeater") && grid.body) {
@@ -132,7 +136,7 @@ export default class Effect extends React.Component<EffectProps, EffectState> {
         }
       } else delete grid.body;
 
-      return <Grid key={key} grid={grid} />;
+      return <Grid key={key} grid={grid} focus={focus as boolean} />;
     });
 
     let routes = this.state.routes.map((route, key) => (

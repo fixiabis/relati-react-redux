@@ -4,7 +4,8 @@ import { RelatiGame } from "../../modules/game";
 let defaultState: State = {
     game: new RelatiGame(),
     playerSymbol: "",
-    opponentSocketId: ""
+    opponentSocketId: "",
+    lastCoor: null
 };
 
 function reducer(state: State = defaultState, action: ArenaAction) {
@@ -14,7 +15,7 @@ function reducer(state: State = defaultState, action: ArenaAction) {
             opponentSocketId: action.socketId,
             playerSymbol: action.symbol
         };
-        
+
         case "ARENA_PLAYER_LEAVE": return {
             ...state,
             opponentSocketId: "",
@@ -23,6 +24,18 @@ function reducer(state: State = defaultState, action: ArenaAction) {
 
         case "ARENA_PLAYER_SELECT_GRID":
             state.game.onGridSelect(action.grid);
+
+            let lastCoor = null;
+
+            if (action.grid) lastCoor = {
+                x: action.grid.x,
+                y: action.grid.y
+            };
+
+            return {
+                ...state,
+                lastCoor
+            };
 
         default: return state;
     }
