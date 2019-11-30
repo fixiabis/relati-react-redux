@@ -1,3 +1,7 @@
 #help-page {
-    
+    .description {
+        height: calc(100vh - 60px);
+        box-sizing: border-box;
+        padding: 10px;
+    }
 }
